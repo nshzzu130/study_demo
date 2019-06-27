@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.hooyee.androidxstudy">
+
+    <application>
+        <activity android:name=".livedata.LiveDataActivity"></activity>
+        <activity android:name=".lifecycles.LifecycleActivity" />
+    </application>
+
+</manifest>

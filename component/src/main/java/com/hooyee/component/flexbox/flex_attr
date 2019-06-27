@@ -1,0 +1,64 @@
+作者：_小河马
+链接：https://www.jianshu.com/p/b3a9c4a99053
+来源：简书
+简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。
+
+
+子元素属性
+除以上之外，FlexboxLayout不仅有自身的属性，还可以设置子元素的属性。这也是FlexboxLayout能完成聪明布局的原因之一
+layout_order
+默认情况下子元素的排列方式按照文档流的顺序依次排序，而order属性可以控制排列的顺序，负值在前，正值在后，按照从小到大的顺序依次排列。简而言之就是你可以定义子元素的排列顺序。
+我们给子元素加上order属性并且自定义他们的顺序
+
+layout_flexGrow
+layout_flexGrow 属性定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大。其实就是 LinearLayout 中的weight属性，如果所有项目的layout_flexGrow  属性都为1，则它们将等分剩余空间。如果一个项目的layout_flexGrow 属性为2，其他项目都为1，则前者占据的剩余空间将比其他项多一倍。
+
+layout_flexShrink
+layout_flexShrink  属性定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。如果所有项目的 layout_flexShrink  属性都为1，当空间不足时，都将等比例缩小。如果一个项目的flex-shrink属性为0，其他项目都为1，则空间不足时，前者不缩小。负值对该属性无效。
+layout_alignSelf
+layout_alignSelf  属性允许单个子元素有与其他子元素不一样的对齐方式，可覆盖 alignItems 属性。默认值为auto，表示继承父元素的alignItems 属性，如果没有父元素，则等同于stretch。
+
+auto (default)
+flex_start
+flex_end
+center
+baseline
+stretch
+
+该属性可能取6个值，除了auto，其他都与align_items属性完全一致，我们设置alignItems为flex_start属性，其中一个子元素设置layout_alignSelf属性为baseline
+可以看到第三个子元素对齐方式和其他的元素对齐方式明显不一样，baseline的基线是第一个元素的  baseline基线。
+layout_flexBasisPercent
+layout_flexBasisPercent 属性定义了在分配多余空间之前，子元素占据的主轴空间的百分比。它的默认值为auto，即子元素的本来大小。
+我们设置第一个和第三个都占据的主轴空间的80%，给子元素添加属性
+app:layout_flexBasisPercent="80%"
+
+FlexboxLayout的属性基本讲解完了，如果一脸懵逼那么请 看第二遍。FlexboxLayout能帮你完成各种你需要的布局，可谓LinearLayout的加强版。比如我们需要做一个类似于Tag标签的布局，那么FlexboxLayout能帮你轻轻松松实现。这里需要用到FlexboxLayoutManager,也就是FlexboxLayout对RecycleView提供的布局管理器
+布局中添加RecycleView
+   <android.support.v7.widget.RecyclerView
+        android:id="@+id/test_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+    </android.support.v7.widget.RecyclerView>
+
+代码中对RecycleView添加布局管理器，并设置FlexboxLayout的主属性
+mRecyclerView = (RecyclerView)findViewById(R.id.test_recyclerView);
+FlexboxLayoutManager layoutManager = new FlexboxLayoutManager();
+layoutManager.setFlexWrap(FlexWrap.WRAP);
+layoutManager.setFlexDirection(FlexDirection.ROW);        layoutManager.setAlignItems(AlignItems.STRETCH);        layoutManager.setJustifyContent(JustifyContent.FLEX_START);
+mRecyclerView.setLayoutManager(layoutManager);
+
+
+在adapter绑定view的时候加入下面的代码
+
+ViewGroup.LayoutParams lp = te.getLayoutParams();
+ if (lp instanceof FlexboxLayoutManager.LayoutParams) {
+         FlexboxLayoutManager.LayoutParams flexboxLp = (FlexboxLayoutManager.LayoutParams) lp;
+         flexboxLp.setFlexGrow(1.0f);
+}
+
+这里是设置的子元素的属性，设置的属性可以参考上面的介绍。效果图如下
+
+作者：_小河马
+链接：https://www.jianshu.com/p/b3a9c4a99053
+来源：简书
+简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。

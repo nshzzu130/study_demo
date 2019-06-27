@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".inputlayout.TextInputLayoutActivity">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/input_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="i am a hint"
+        android:layout_margin="20dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:boxStrokeColor="#abedff"
+        app:errorEnabled="true"
+        app:boxStrokeWidth="10dp"
+        app:helperTextEnabled="true"
+        app:helperText="i am a helper msg"
+        app:endIconMode="clear_text"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/text_input"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+        <!--android:background="@drawable/shape_rect_stroke_cacaca_r_4"-->
+        <!--android:background="@android:color/transparent"-->
+
+    </com.google.android.material.textfield.TextInputLayout>
+</LinearLayout>
